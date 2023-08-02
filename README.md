@@ -6,3 +6,4 @@ Example of application for creating new projects with modern technology stack:
  * Retrofit2
  * Hilt (DI)
  * Jetpack Compose (UI)
+ * Version Catalogs
