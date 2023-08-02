@@ -15,4 +15,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "Skeleton App"
 include(":app")
- 
+include(":core")
+include(":uicomponents")
