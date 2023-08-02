@@ -10,6 +10,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.skeleton.presentation.view.OrderScreen
 import com.example.skeleton.ui.theme.SkeletonAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -25,25 +26,32 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Greeting("Android")
+                    OrderScreen()
+//                    Greeting("Android")
                 }
             }
         }
     }
 }
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello, $name!",
-        modifier = modifier
-    )
-}
+//@Composable
+//fun Greeting(name: String, modifier: Modifier = Modifier) {
+//    Text(
+//        text = "Hello, $name!",
+//        modifier = modifier
+//    )
+//}
 
-@Preview(showBackground = true)
+//@Preview(showBackground = false)
+//@Composable
+//fun GreetingPreview() {
+//    SkeletonAppTheme {
+//        Greeting("Android")
+//    }
+//}
+
+@Preview(showBackground = false)
 @Composable
-fun GreetingPreview() {
-    SkeletonAppTheme {
-        Greeting("Android")
-    }
+fun OrderScreenPreview() {
+    OrderScreen()
 }
