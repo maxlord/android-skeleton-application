@@ -71,6 +71,7 @@ dependencies {
 
 //    implementation(libs.material.compose)
     implementation(libs.lifecycle.viewmodel.compose)
+    implementation(libs.compose.navigation)
 
     // DI
     implementation(libs.hilt.android)

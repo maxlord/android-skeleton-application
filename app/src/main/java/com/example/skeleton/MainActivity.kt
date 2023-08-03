@@ -6,11 +6,10 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.skeleton.presentation.view.OrderScreen
+import com.example.skeleton.presentation.view.AppScreen
 import com.example.skeleton.ui.theme.SkeletonAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -26,7 +25,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    OrderScreen()
+                    AppScreen()
 //                    Greeting("Android")
                 }
             }
@@ -53,5 +52,5 @@ class MainActivity : ComponentActivity() {
 @Preview(showBackground = false)
 @Composable
 fun OrderScreenPreview() {
-    OrderScreen()
+    AppScreen()
 }

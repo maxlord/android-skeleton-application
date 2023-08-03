@@ -4,21 +4,23 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.skeleton.domain.model.OrderScreenState
+import com.example.skeleton.domain.model.OrderListScreenState
 import com.example.skeleton.domain.repository.OrderRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.last
+import kotlinx.coroutines.flow.lastOrNull
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
-class OrdersViewModel @Inject constructor(
+class OrderListViewModel @Inject constructor(
     private val orderRepo: OrderRepository
 ) : ViewModel() {
 
-    private val _state = mutableStateOf(OrderScreenState())
-    val state: State<OrderScreenState> = _state
+    private val _state = mutableStateOf(OrderListScreenState())
+    val state: State<OrderListScreenState> = _state
 
     init {
         refreshOrders()
@@ -35,7 +37,7 @@ class OrdersViewModel @Inject constructor(
                 withContext(Dispatchers.Main) {
                     _state.value = _state.value.copy(
                         isLoading = false,
-                        orders = orders
+                        orders = orders.lastOrNull().orEmpty()
                     )
                 }
             }
