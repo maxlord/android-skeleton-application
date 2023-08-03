@@ -4,38 +4,41 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.skeleton.domain.model.Order
 import com.example.skeleton.domain.model.OrderScreenState
-import kotlinx.coroutines.delay
+import com.example.skeleton.domain.repository.OrderRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlin.random.Random
+import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class OrdersViewModel : ViewModel() {
+@HiltViewModel
+class OrdersViewModel @Inject constructor(
+    private val orderRepo: OrderRepository
+) : ViewModel() {
 
     private val _state = mutableStateOf(OrderScreenState())
     val state: State<OrderScreenState> = _state
 
     init {
-        loadOrders()
+        refreshOrders()
     }
 
-    fun loadOrders() {
+    fun refreshOrders() {
         viewModelScope.launch {
-            _state.value = _state.value.copy(isLoading = true)
-            delay(5_000L)
             _state.value = _state.value.copy(
-                isLoading = false,
-                orders = _state.value.orders.toMutableList().also {
-                    for (i in 0..15) {
-                        it.add(
-                            Order(
-                                title = "Order #${it.size + 1}",
-                                price = Random.nextDouble(10.0, 100.0)
-                            )
-                        )
-                    }
-                }
+                orders = emptyList(),
+                isLoading = true
             )
+            withContext(Dispatchers.IO) {
+                val orders = orderRepo.getOrders()
+                withContext(Dispatchers.Main) {
+                    _state.value = _state.value.copy(
+                        isLoading = false,
+                        orders = orders
+                    )
+                }
+            }
         }
     }
 }
