@@ -1,4 +1,4 @@
-package com.example.uicomponents
+package com.example.uikit
 
 import org.junit.Test
 
